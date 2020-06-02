@@ -1,6 +1,6 @@
 import React from 'react';
 import Web3 from 'web3'
-//import {ELECTION_ADDRESS, ELECTION_ABI} from './config.js'
+import {COMMITTEE_ADDRESS, COMMITTEE_ABI} from './config.js'
 
 import './App.css';
 
@@ -34,8 +34,9 @@ class MainComponent extends React.Component{
                 const accounts = await web3.eth.getAccounts()
                 console.log("Accounts")
                 console.log(accounts)
-                const contract = new web3.eth.Contract(ELECTION_ABI,
-                   ELECTION_ADDRESS);
+                const contract = new web3.eth.Contract(COMMITTEE_ABI,
+                   COMMITTEE_ADDRESS);
+                   console.log(contract);
                 //example call
                 //var candidatesCount = await election.methods.candidateCount().call();
                 
