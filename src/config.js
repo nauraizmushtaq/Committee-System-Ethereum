@@ -1,0 +1,5 @@
+export const COMMITTEE_ADDRESS =
+'0xe624E77784C3EaA44Dbb113E5B7D749799Bb518d'
+export const COMMITTEE_ABI = [
+    
+  ]
