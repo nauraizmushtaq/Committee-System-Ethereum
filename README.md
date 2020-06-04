@@ -19,8 +19,8 @@ This application provides the commitee services to user thorugh which user can
 
 # How to Run
 ``
-start Ganache
-compile, migrate contract
-npm start
-connect with metaMask
+1. start Ganache
+2. compile, migrate contract
+3. npm start
+4. connect with metaMask
 ``
