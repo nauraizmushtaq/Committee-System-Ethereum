@@ -36,10 +36,17 @@ class MainComponent extends React.Component{
                 console.log(accounts)
                 const contract = new web3.eth.Contract(COMMITTEE_ABI,
                    COMMITTEE_ADDRESS);
-                   console.log(contract);
+                
+               // var pool = await contract.methods.owner({from:accounts[0]});
+                var pool = await contract.methods.makePool(1,2,3,4).call();
+                //console.log(contract);
+                console.log("hello");
+                console.log(pool);
+                console.log("h");
                 //example call
                 //var candidatesCount = await election.methods.candidateCount().call();
-                
+                var pool1 = await contract.methods.makePool(2,3,4,5).call();
+                console.log(pool1);
             } catch (error) {
                 // User denied account access...
             }
