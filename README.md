@@ -18,6 +18,9 @@ This application provides the commitee services to user thorugh which user can
 3. React.js
 
 # How to Run
-``
-Running Commands
-``
+```
+1. start Ganache
+2. compile, migrate contract
+3. npm start
+4. connect with metaMask
+```
