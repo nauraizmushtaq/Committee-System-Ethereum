@@ -1,11 +1,11 @@
 ## How to run the Committee-System
 Guide for running the committee system on local machine
 ### Installations
-● Ganache
-● Node JS
-● React JS
-● Metamask Chrome Extension
-● Truffle
+* Ganache
+* Node JS
+* React JS
+* Metamask Chrome Extension
+* Truffle
 
 ### Pre Setup Requirements
 ●Install Node
