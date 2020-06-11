@@ -25,7 +25,7 @@ contract Committee {
 
     mapping(uint => Member) public members; //to store member objects to get name ect of members4
     mapping(address => uint) public _members; //to get key of member => 0 for invalid members, some index for valid members
-    address payable[] members_array;
+    address[] members_array;
     uint public memberCount;
     mapping(address => bool)  blacklist; //addresses who are not allowed to be members => blacklist(address) == true if member is in blacklist
 
@@ -42,6 +42,7 @@ contract Committee {
 
     }
 
+    /**Function to add a new member to the committee */
     function addMember (address member_address, string memory name) public payable returns (bool){
         if(isActive == true){
             return false;
@@ -59,7 +60,7 @@ contract Committee {
         _members[member_address] = memberCount; //store index in _members map
       	members[memberCount].security = msg.value;
         members_array.push(member_address);
-        /*Make pool as active if quorum complete*/
+        //Make pool as active if quorum complete/
         if(memberCount == quorum){
             isActive = true;
             current_cycle = 1;
@@ -67,24 +68,14 @@ contract Committee {
         return true;
     }
 
-    function setQuorum(uint q) public {
-        quorum = q;
-    }
-
-    function setAmount(uint a) public {
-        amount = a;
-    }
-
-    function setLateFee(uint lf) public {
-        lateFee = lf;
-    }
-
+    
+    /**Function to pay the committee for the current cycle. It can be paid only once in the cycle */
     function payCommittee(address member_address) public payable{
         require (isActive == true);
         if(paid_in_cycle[member_address] == true){
             return;
         }
-        //TODO: check if msg.value is correct
+        
         uint index = _members[member_address]; //get index
         members[index].amountPaid += msg.value; //msg.value contains the amount sent
         //^ Note: this is only record keeping. Actual amount is stored in contract.
@@ -93,10 +84,13 @@ contract Committee {
         cycle_paid_count+=1;
     }
 
-    function isPoolOwner() public view returns(bool) {
-        return msg.sender == owner;
+    /**Function to leave the committee */
+    function leaveCommitee(address member_address) public payable{
+         _members[member_address]=0;
     }
-
+    
+    
+    /**Function to transfer the committee to the account whose turn it is */
     function withdrawCommitee() public{
         //reset if cycle complete
         if(cycle_paid_count == memberCount){
@@ -105,18 +99,42 @@ contract Committee {
                 paid_in_cycle[members_array[i]] = false; //set all members pay in cycle to false
             }
             cycle_paid_count = 0;
-            current_cycle+=1;
-            turnAddress = members_array[current_cycle-1];
+            current_cycle += 1;
+            turnAddress = address(uint160(members_array[current_cycle-1]));
         }
         
     }
-
+    /**Function to stop the committee once it is finished */
     function stopCommittee() public {
         isActive = false;
-      	//TODO: loop to pay back security
-        for (uint i = 0; i<members_array.length; i++) {
-            members_array[i].transfer(members[members_array[i]].security); //set all members pay in cycle to false
-        }
+    }
+
+
+    /**Utility functions */
+    function setQuorum(uint q) public {
+        quorum = q;
+    }
+
+    function setCycles(uint q) public {
+        current_cycle = q;
+    }
+    function setAmount(uint a) public {
+        amount = a;
+    }
+
+    function setLateFee(uint lf) public {
+        lateFee = lf;
+    }
+
+    function makepool(uint amo, uint cycles, uint quo) public payable{
+        current_cycle = cycles;
+        quorum = quo;
+        amount = amo;
+        security_amount = amo;
+    }
+
+    function isPoolOwner() public view returns(bool) {
+        return msg.sender == owner;
     }
 
 }

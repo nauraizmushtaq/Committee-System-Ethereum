@@ -1,38 +1,59 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.ParentLayout {
+  width: 100%;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+
+.Column1 {
+  flex-basis: 70%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.Column2 {
+  flex-basis: 30%;
+  background-image: url("https://images.assetsdelivery.com/compings_v2/ihorbiliavskyi/ihorbiliavskyi1812/ihorbiliavskyi181200473.jpg");
+  background-position: center;
+  background-size: cover;
+  overflow: visible;
+  background-color: white;
+}
+
+.button {
+  background-color: #4caf50; /* Green */
+
+  border-radius: 40px;
+  color: white;
+  padding: 16px 100px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white;
+  color: black;
+  border: 2px solid #4caf50;
+}
+
+.button1:hover {
+  background-color: #4caf50;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.button3 {
+  background-color: white;
+  color: black;
+  border: 2px solid #f44336;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.button3:hover {
+  background-color: #f44336;
+  color: white;
 }
